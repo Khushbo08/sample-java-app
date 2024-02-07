@@ -1,0 +1,35 @@
+name: Build and Deploy Java App Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      MYSQL_HOST_WITH_PORT: ${{ secrets.MYSQL_HOST_WITH_PORT }}
+      MYSQL_DB_NAME: ${{ secrets.MYSQL_DB_NAME }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
+                        
+    - name: Build and analyze
+      run: |
+        mvn clean package
+      
+    - name: Build Docker Image
+      run: |
+        docker build --build-arg MYSQL_HOST_WITH_PORT=$MYSQL_HOST_WITH_PORT --build-arg MYSQL_DB_NAME=$MYSQL_DB_NAME --build-arg MYSQL_USER=$MYSQL_USER --build-arg MYSQL_PASSWORD=$MYSQL_PASSWORD -t javaimage:latest .
+        
