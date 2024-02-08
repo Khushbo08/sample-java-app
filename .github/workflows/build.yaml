@@ -33,6 +33,7 @@ jobs:
       run: |
         # docker build --build-arg MYSQL_HOST_WITH_PORT=$MYSQL_HOST_WITH_PORT --build-arg MYSQL_DB_NAME=$MYSQL_DB_NAME --build-arg MYSQL_USER=$MYSQL_USER --build-arg MYSQL_PASSWORD=$MYSQL_PASSWORD -t javaimage:latest .
         docker build -t githubaction-snyk .
+        docker tag githubaction-snyk:latest 920726643262.dkr.ecr.us-east-1.amazonaws.com/githubaction-snyk:latest
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
