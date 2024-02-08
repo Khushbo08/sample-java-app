@@ -25,7 +25,7 @@ jobs:
       with:
         fetch-depth: 0
                         
-    - name: Build and analyze
+    - name: Build 
       run: |
         mvn clean package
       
@@ -36,7 +36,7 @@ jobs:
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
-      continue-on-error: true
+      # continue-on-error: true
       uses: snyk/actions/docker@master
       env:
         # In order to use the Snyk Action you will need to have a Snyk API token.
@@ -46,9 +46,14 @@ jobs:
       with:
         image: javaimage
         args: --file=Dockerfile
+       # args: --sarif-file-output=snyk.sarif
         
-    - name: Upload result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-       sarif_file: snyk.sarif
+    #- name: Upload result to GitHub Code Scanning
+     # uses: github/codeql-action/upload-sarif@v2
+     # with:
+      # sarif_file: snyk.sarif
+       
+          
+     
+ 
         
