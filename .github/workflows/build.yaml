@@ -53,6 +53,7 @@ jobs:
       # In this case we want to upload the issues to GitHub Code Scanning
       # continue-on-error: true
       uses: snyk/actions/docker@master
+      continue-on-error: true
       env:
         # In order to use the Snyk Action you will need to have a Snyk API token.
         # See https://docs.snyk.io/integrations/ci-cd-integrations/github-actions-integration#getting-your-snyk-token
