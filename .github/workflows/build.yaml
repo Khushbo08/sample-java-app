@@ -43,6 +43,10 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
+    - name: Build Docker Image
+      run: |
+       docker push 920726643262.dkr.ecr.us-east-1.amazonaws.com/githubaction-snyk:javaimage:latest
+    
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
@@ -54,8 +58,7 @@ jobs:
         # or you can sign up for free at https://snyk.io/login
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        image: javaimage
-        args: --file=Dockerfile
+        image: javaimagea
        # args: --sarif-file-output=snyk.sarif
         
     #- name: Upload result to GitHub Code Scanning
