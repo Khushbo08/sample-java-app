@@ -38,6 +38,6 @@ jobs:
     
     - name: Push Docker Image
       run: |
-       docker push khushbub/github-action-image:latest
+       docker push khushbub/javaimage:latest
 
    
