@@ -23,19 +23,21 @@ jobs:
     - name: Build jar locally
       run: |
         mvn clean package
-
-    - name: Build Docker Image
-      run: |
-         docker build --build-arg MYSQL_HOST_WITH_PORT=$MYSQL_HOST_WITH_PORT --build-arg MYSQL_DB_NAME=$MYSQL_DB_NAME --build-arg MYSQL_USER=$MYSQL_USER --build-arg MYSQL_PASSWORD=$MYSQL_PASSWORD  javaimage .
-
+        
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}     
+             username: ${{ secrets.DOCKERHUB_USERNAME }}
+             password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build Docker Image   
+      run: |
+         docker build --build-arg MYSQL_HOST_WITH_PORT=$MYSQL_HOST_WITH_PORT --build-arg MYSQL_DB_NAME=$MYSQL_DB_NAME --build-arg MYSQL_USER=$MYSQL_USER --build-arg MYSQL_PASSWORD=$MYSQL_PASSWORD -t khushbub/github-action-image:latest .
+
+        
     
     - name: Push Docker Image
       run: |
-       docker push khushbub/github-action-image:javaimage
+       docker push khushbub/github-action-image:latest
 
    
