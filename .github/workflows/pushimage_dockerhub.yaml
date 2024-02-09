@@ -34,8 +34,6 @@ jobs:
       run: |
          docker build --build-arg MYSQL_HOST_WITH_PORT=$MYSQL_HOST_WITH_PORT --build-arg MYSQL_DB_NAME=$MYSQL_DB_NAME --build-arg MYSQL_USER=$MYSQL_USER --build-arg MYSQL_PASSWORD=$MYSQL_PASSWORD -t khushbub/javaimage:latest .
 
-        
-    
     - name: Push Docker Image
       run: |
        docker push khushbub/javaimage:latest
