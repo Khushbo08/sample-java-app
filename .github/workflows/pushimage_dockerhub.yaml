@@ -8,7 +8,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      MYSQL_HOST_WITH_PORT: "jdbc:mysql://34.172.203.60:3306/wine"
+      MYSQL_HOST_WITH_PORT: "34.172.203.60:3306"
       MYSQL_DB_NAME: wine
       MYSQL_USER: root
       MYSQL_PASSWORD: manager
